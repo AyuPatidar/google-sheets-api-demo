@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>Hello!</h1>
+		<script>
+			// Example JSON data
+			const jsonData = [
+				["Name", "Age", "Location"],
+				["Alice", 30, "New York"],
+				["Bob", 25, "San Francisco"],
+			];
+
+			// Function to send JSON data to the server
+			async function sendDataToServer(data) {
+				try {
+					const response = await fetch("http://localhost:5000/write-to-sheet", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ data: data }),
+					});
+					if (!response.ok) throw new Error(response);
+
+					const result = await response.json();
+					console.log("Data written to sheet:", result);
+				} catch (error) {
+					console.error("Error:", error);
+				}
+			}
+
+			// Automatically send data when the page loads
+			window.onload = () => {
+				sendDataToServer(jsonData);
+			};
+		</script>
+	</body>
+</html>
