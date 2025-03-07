@@ -8,7 +8,7 @@ This demo app demonstrates how to integrate the Google Sheets API into your appl
 
 [Google Sheets](https://docs.google.com/spreadsheets/u/0/)
 
-Create a sheet and set it to public and allow edit option for anyone with the link. Copy the spreadsheet id. To know about spreadsheet id refer to the docs attached.
+Create a sheet. Copy the spreadsheet id, it will be needed later. To know about spreadsheet id refer to the docs attached.
 
 [Google Cloud Console](https://console.cloud.google.com)
 
@@ -47,10 +47,11 @@ To run this project, you will need to add `service-account.json` inside the serv
 
 ### Step 4 - Download service-account.json file
 1. On the Service Accounts page, find the service account you just created.
-2. Click on the three vertical dots next to your service account and select Manage Keys.
-3. In the Keys section, click Add Key > Create new key.
-4. Select JSON as the key type and click "Create".
-5. The JSON file will be automatically downloaded to your computer. Rename it to "service-account.json".
+3. Click on the three vertical dots next to your service account and select Manage Keys.
+4. In the Keys section, click Add Key > Create new key.
+5. Select JSON as the key type and click "Create".
+6. The JSON file will be automatically downloaded to your computer. Rename it to "service-account.json".
+7. Share your google sheet with the service account email and provide the editor role for this account.
 
 ## Run locally
 
