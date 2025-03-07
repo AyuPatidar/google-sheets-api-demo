@@ -6,11 +6,9 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-const port = 5000;
 
-// Body parser middleware to handle incoming JSON data
 app.use(cors());
-// Path to your service account JSON file
+// Path to your service-account.json file
 const keyPath = path.join(__dirname, "service-account.json");
 const credentials = JSON.parse(fs.readFileSync(keyPath));
 
@@ -25,15 +23,13 @@ const sheets = google.sheets({ version: "v4", auth });
 // Define your spreadsheet ID (replace with your actual Spreadsheet ID)
 const SPREADSHEET_ID = "1YyTZqlSAiR1VMbIkQYAs5jRYoEe00m0qzh_m9DCS02M";
 
-// Endpoint to accept JSON data from the client
 app.post("/write-to-sheet", async (req, res) => {
 	try {
-		const { data } = req.body; // The JSON data to be written
-		console.log("Done");
-
+		const { data } = req.body;
+		
 		// The range where you want to write the data, e.g., Sheet1!A1
 		const range = "Sheet1!A6";
-
+		
 		// Write to the sheet
 		const response = await sheets.spreadsheets.values.update({
 			spreadsheetId: SPREADSHEET_ID,
@@ -49,7 +45,7 @@ app.post("/write-to-sheet", async (req, res) => {
 	}
 });
 
-// Start server
+const port = 5000;
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`);
 });
