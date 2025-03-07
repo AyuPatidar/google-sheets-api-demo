@@ -6,6 +6,10 @@ This demo app demonstrates how to integrate the Google Sheets API into your appl
 
 [Documentation - Google Sheets API](https://developers.google.com/sheets/api/guides/concepts)
 
+[Google Sheets](https://docs.google.com/spreadsheets/u/0/)
+
+Create a sheet and set it to public and allow edit option for anyone with the link. Copy the spreadsheet id. To know about spreadsheet id refer to the docs attached.
+
 [Google Cloud Console](https://console.cloud.google.com)
 
 This project requires a google developer account. Head out to the above link to create one, if you do not have one.
@@ -58,7 +62,9 @@ To run this project, you will need to add `service-account.json` inside the serv
 
 ### Step 2 - Move the downloaded "service-account.json" file inside the server directory.
 
-### Step 2 - Run the server
+### Step 3 - Fill the spreadsheet id in your server.js file.
+
+### Step 4 - Run the server
 
 ```bash
   cd server
