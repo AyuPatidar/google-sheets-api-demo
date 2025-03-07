@@ -21,7 +21,7 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: "v4", auth });
 
 // Define your spreadsheet ID (replace with your actual Spreadsheet ID)
-const SPREADSHEET_ID = "1YyTZqlSAiR1VMbIkQYAs5jRYoEe00m0qzh_m9DCS02M";
+const SPREADSHEET_ID = "<YOUR_SPREADSHEET_ID>";
 
 app.post("/write-to-sheet", async (req, res) => {
 	try {
