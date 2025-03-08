@@ -21,15 +21,24 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: "v4", auth });
 
 // Define your spreadsheet ID (replace with your actual Spreadsheet ID)
-const SPREADSHEET_ID = "<YOUR_SPREADSHEET_ID>";
+const SPREADSHEET_ID = "YOUR_SPREADSHEET_ID";
 
 app.post("/write-to-sheet", async (req, res) => {
 	try {
 		const { data } = req.body;
-		
-		// The range where you want to write the data, e.g., Sheet1!A1
-		const range = "Sheet1!A6";
-		
+
+		// Read from sheet
+		const readResponse = await sheets.spreadsheets.values.get({
+			spreadsheetId: SPREADSHEET_ID,
+			range: "Sheet1!A:A", // Range to get all values in column A
+		});
+
+		// Find the next empty cell in column A
+		const rows = readResponse.data.values;
+		const nextRow = rows ? rows.length + 1 : 1;
+
+		const range = `Sheet1!A${nextRow}`;
+
 		// Write to the sheet
 		const response = await sheets.spreadsheets.values.update({
 			spreadsheetId: SPREADSHEET_ID,

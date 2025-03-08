@@ -9,16 +9,14 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<h1>Hello!</h1>
+		<h1>Time: <span id="time"></span></h1>
 		<script>
-			// Example JSON data
 			const jsonData = [
 				["Name", "Age", "Location"],
 				["Alice", 30, "New York"],
 				["Bob", 25, "San Francisco"],
 			];
 
-			// Function to send JSON data to the server
 			async function sendDataToServer(data) {
 				try {
 					const response = await fetch("http://localhost:5000/write-to-sheet", {
@@ -37,9 +35,27 @@
 				}
 			}
 
-			// Automatically send data when the page loads
-			window.onload = () => {
-				sendDataToServer(jsonData);
+			let timeout;
+
+			function setNextHour() {
+				const now = new Date();
+				document.getElementById("time").innerText = now.toLocaleString();
+				const currentMinutes = now.getMinutes();
+				const currentSeconds = now.getSeconds();
+
+				const msUntilNextHour =
+					(60 - currentMinutes) * 60 * 1000 - currentSeconds * 1000;
+
+				timeout = setTimeout(function () {
+					sendDataToServer(jsonData);
+					setNextHour();
+				}, msUntilNextHour);
+			}
+
+			window.onload = setNextHour;
+
+			window.onbeforeunload = function () {
+				clearTimeout(timeoutId);
 			};
 		</script>
 	</body>
